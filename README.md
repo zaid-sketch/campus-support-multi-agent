@@ -86,6 +86,11 @@ Campus Support Coordinator → IT Support Agent → Student Response
 The multi-agent system has been built, tested, evaluated, and monitored successfully.
 
 ## Author
+
+**Zaid Khan**  
+B.Tech Computer Science & Engineering  
+Hindustan College of Science & Technology
+
 ## Agent Execution Evidence
 
 ### Agent-to-Agent Routing
