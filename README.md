@@ -105,4 +105,16 @@ The system uses the configured knowledge source to retrieve relevant information
 
 ![Knowledge Search Trace](images/knowledge-search-trace.png)
 
-**Zaid Khan**
+### Evaluation Results
+
+The Campus Support Coordinator was evaluated in Microsoft Foundry using an automatic evaluation run.
+
+The evaluation assessed response quality and agent behavior across multiple test queries, including academic and IT-support scenarios.
+
+Key results included:
+- Task Adherence: 100%
+- Relevance: 100%
+- Intent Resolution: 100%
+- Tool Output Utilization: 94%
+
+![Microsoft Foundry Evaluation Results](images/evaluation-results.png)
