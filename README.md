@@ -86,5 +86,18 @@ Campus Support Coordinator → IT Support Agent → Student Response
 The multi-agent system has been built, tested, evaluated, and monitored successfully.
 
 ## Author
+## Agent Execution Evidence
+
+### Agent-to-Agent Routing
+
+The Campus Support Coordinator routes technical support requests to the IT Support Agent using agent-to-agent (A2A) communication.
+
+![IT Support Agent Routing Trace](images/it-agent-routing-trace.png)
+
+### Knowledge Retrieval
+
+The system uses the configured knowledge source to retrieve relevant information when handling student queries.
+
+![Knowledge Search Trace](images/knowledge-search-trace.png)
 
 **Zaid Khan**
