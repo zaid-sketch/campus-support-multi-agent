@@ -138,7 +138,22 @@ The following trace provides evidence of the knowledge retrieval process during 
 
 ![Knowledge Search Trace](images/knowledge-search-trace.png)
 
----
+### Local Coordinator Execution
+
+The Campus Support Coordinator was successfully invoked locally using the Python client connected to the deployed Microsoft Foundry agent.
+
+The execution confirms that the local application can authenticate with Azure, connect to the Microsoft Foundry project, and invoke the deployed Campus Support Coordinator.
+
+![Local Coordinator Execution](images/local-coordinator-execution.png)
+
+### GitHub Actions CI
+
+A GitHub Actions workflow is configured to automatically validate the Python project on pushes and pull requests to the `main` branch.
+
+The workflow installs the project dependencies and performs the configured validation checks. The successful workflow run confirms that the CI pipeline is working correctly.
+
+![GitHub Actions CI Success](images/github-actions-ci-success.png)
+
 
 ## Technologies Used
 
@@ -352,6 +367,8 @@ The repository includes:
 - [x] Secrets excluded from repository
 - [x] GitHub Actions CI configured
 - [x] CI build passed
+- [x] Local coordinator invocation tested successfully
+- [x] GitHub Actions CI workflow passed successfully
 
 ---
 
