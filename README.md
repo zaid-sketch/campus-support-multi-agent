@@ -1,8 +1,10 @@
 # Campus Support Multi-Agent System
 
-![Python CI](https://github.com/zaid-sketch/campus-support-multi-agent/actions/workflows/ci.yml/badge.svg)
+[![Python CI](https://github.com/zaid-sketch/campus-support-multi-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/zaid-sketch/campus-support-multi-agent/actions/workflows/ci.yml)
 
 A multi-agent AI system built using Microsoft Foundry to provide students with academic and IT support through intelligent agent-to-agent routing.
+
+---
 
 ## Overview
 
@@ -10,39 +12,85 @@ The Campus Support Multi-Agent System uses a coordinator agent to understand a s
 
 The system consists of three agents:
 
-- **Campus Support Coordinator** – analyzes requests and delegates them to the appropriate specialist.
+- **Campus Support Coordinator** – analyzes student requests and delegates them to the appropriate specialist agent.
 - **Academic Support Agent** – handles examination schedules, reporting times, academic deadlines, notices, workshops, hackathons, internships, and other academic queries.
 - **IT Support Agent** – handles campus Wi-Fi, login issues, account access, password problems, student portal issues, and basic technical troubleshooting.
 
+---
+
 ## Architecture
 
-Student
-↓
-Campus Support Coordinator
-↓
-Request Classification
-↓
-Academic Support Agent / IT Support Agent
-↓
-Response returned to the student
+The system follows a coordinator-based multi-agent architecture:
 
-The coordinator uses agent-to-agent communication to delegate requests to specialist agents.
+```text
+Student
+   ↓
+Campus Support Coordinator
+   ↓
+Request Classification
+   ↓
+┌─────────────────────────┐
+│                         │
+↓                         ↓
+Academic Support Agent    IT Support Agent
+│                         │
+└─────────────┬───────────┘
+              ↓
+      Response to Student
+```
+
+The Campus Support Coordinator uses agent-to-agent communication to delegate requests to the appropriate specialist agent.
+
+---
 
 ## Key Features
 
 - Multi-agent architecture
-- Intelligent request routing
-- Agent-to-agent communication
-- Academic support
-- IT troubleshooting support
+- Intelligent request classification and routing
+- Agent-to-Agent (A2A) communication
+- Dedicated academic support agent
+- Dedicated IT support agent
 - Knowledge-grounded responses
+- Microsoft Foundry agent deployment
 - Synthetic evaluation dataset
 - Automated agent evaluation
 - Application Insights tracing and monitoring
+- Python-based agent invocation
+- Environment configuration example
+- Secure credential handling
+- GitHub Actions continuous integration
+
+---
+
+## Example Workflow
+
+### Student Request
+
+> My laptop cannot connect to the campus Wi-Fi. Can you help me troubleshoot it?
+
+### Routing
+
+```text
+Student Request
+      ↓
+Campus Support Coordinator
+      ↓
+Request identified as IT Support
+      ↓
+IT Support Agent
+      ↓
+Troubleshooting Response
+      ↓
+Student
+```
+
+This demonstrates how the coordinator delegates a technical request to the IT Support Agent.
+
+---
 
 ## Evaluation
 
-The system was evaluated in Microsoft Foundry using a synthetic evaluation dataset.
+The Campus Support Coordinator was evaluated in Microsoft Foundry using an automatic evaluation run with multiple test queries covering academic and IT-support scenarios.
 
 Evaluation criteria included:
 
@@ -52,36 +100,81 @@ Evaluation criteria included:
 - Groundedness
 - Coherence
 - Fluency
-- Tool utilization and tool-call metrics
+- Tool Output Utilization
+- Tool-call metrics
+
+### Evaluation Results
+
+| Metric | Result |
+|---|---:|
+| Task Adherence | 100% |
+| Relevance | 100% |
+| Intent Resolution | 100% |
+| Tool Output Utilization | 94% |
 
 The evaluation demonstrated strong performance across the primary response-quality metrics.
 
+![Microsoft Foundry Evaluation Results](images/evaluation-results.png)
+
+---
+
 ## Monitoring and Tracing
 
-Application Insights is integrated with the project to capture agent execution traces.
+Azure Application Insights is integrated with the Microsoft Foundry project to capture agent execution traces.
 
-Tracing was used to verify that the coordinator correctly delegates requests to specialist agents, including routing IT-related requests to the IT Support Agent.
+Tracing was used to inspect agent execution and verify that the Campus Support Coordinator delegates requests to specialist agents.
 
-## Example
+### Agent-to-Agent Routing
 
-**Student request:**
+The following trace demonstrates the Campus Support Coordinator routing a technical support request to the IT Support Agent using Agent-to-Agent (A2A) communication.
 
-> My laptop cannot connect to the campus Wi-Fi. Can you help me troubleshoot it?
+![IT Support Agent Routing Trace](images/it-agent-routing-trace.png)
 
-**Routing:**
+### Knowledge Retrieval
 
-Campus Support Coordinator → IT Support Agent → Student Response
+The system uses the configured knowledge source to retrieve relevant information when handling student queries.
+
+The following trace provides evidence of the knowledge retrieval process during agent execution.
+
+![Knowledge Search Trace](images/knowledge-search-trace.png)
+
+---
 
 ## Technologies Used
 
 - Microsoft Foundry
 - Azure AI
 - GPT-4.1-mini
+- Python
 - Multi-Agent Architecture
 - Agent-to-Agent (A2A) Communication
 - Azure Application Insights
 - Azure Monitor
 - GitHub
+- GitHub Actions
+
+---
+
+## Deployment
+
+The Campus Support Coordinator is deployed and running in Microsoft Foundry.
+
+| Property | Value |
+|---|---|
+| Agent | `campus-support-coordinator` |
+| Platform | Microsoft Foundry |
+| Agent Version | `4` |
+| Status | Running |
+
+The deployed agent can be invoked programmatically using the Python script provided in:
+
+```text
+src/invoke_coordinator.py
+```
+
+The specialist Academic Support Agent and IT Support Agent are connected to the coordinator for request delegation.
+
+---
 
 ## Installation and Usage
 
@@ -91,8 +184,9 @@ Before running the project, make sure you have:
 
 - Python 3.11 or later
 - An Azure account with access to the Microsoft Foundry project
-- Azure CLI installed and authenticated
+- Azure CLI installed
 - Access to the deployed Campus Support Coordinator agent
+- Required Azure permissions for authentication
 
 ### Clone the Repository
 
@@ -109,21 +203,40 @@ pip install -r requirements.txt
 
 ### Azure Authentication
 
-Sign in to Azure:
+Sign in to Azure using the Azure CLI:
 
 ```bash
 az login
 ```
 
-The Python invocation script uses `DefaultAzureCredential` to authenticate with Azure.
+The Python invocation script uses `DefaultAzureCredential` to authenticate securely with Azure.
+
+No API keys or credentials are hard-coded in the source code.
 
 ### Environment Configuration
 
-The repository includes `.env.example` as a reference for the project configuration.
+The repository includes:
 
-Do not commit API keys, tokens, `.env` files, or other credentials to the repository.
+```text
+.env.example
+```
+
+This file provides a reference for environment configuration.
+
+Do not commit:
+
+- API keys
+- Access tokens
+- Passwords
+- `.env` files
+- Azure credentials
+- Other secrets
+
+The `.gitignore` file is configured to prevent common secret and Python-generated files from being committed.
 
 ### Run the Coordinator
+
+After authenticating with Azure, run:
 
 ```bash
 python src/invoke_coordinator.py
@@ -131,19 +244,51 @@ python src/invoke_coordinator.py
 
 The script connects to the Microsoft Foundry project and invokes the deployed `campus-support-coordinator` agent.
 
+---
+
+## Continuous Integration
+
+This repository uses GitHub Actions for continuous integration.
+
+The CI workflow automatically runs when changes are pushed to the repository.
+
+The workflow:
+
+1. Checks out the repository
+2. Sets up the Python environment
+3. Installs project dependencies
+4. Validates the Python source code
+5. Confirms that the build completes successfully
+
+The workflow configuration is located at:
+
+```text
+.github/workflows/ci.yml
+```
+
+The latest CI workflow has completed successfully.
+
+The CI status can also be viewed using the badge at the top of this README.
+
+---
+
 ## Repository Structure
 
 ```text
 campus-support-multi-agent/
+│
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
+│
 ├── images/
 │   ├── evaluation-results.png
 │   ├── it-agent-routing-trace.png
 │   └── knowledge-search-trace.png
+│
 ├── src/
 │   └── invoke_coordinator.py
+│
 ├── .env.example
 ├── .gitignore
 ├── LICENSE
@@ -151,43 +296,40 @@ campus-support-multi-agent/
 └── requirements.txt
 ```
 
+---
+
+## Security
+
+This repository does not contain real API keys, access tokens, passwords, or other authentication secrets.
+
+Authentication is handled using Azure identity mechanisms through `DefaultAzureCredential`.
+
+Sensitive environment files are excluded through `.gitignore`, while `.env.example` is provided only as a configuration reference.
+
+---
+
 ## Project Status
 
-The multi-agent system has been built, tested, evaluated, and monitored successfully.
+The Campus Support Multi-Agent System has been successfully built, deployed, tested, evaluated, and monitored in Microsoft Foundry.
 
-## Author
+The repository includes:
 
-**Zaid Khan**  
-B.Tech Computer Science & Engineering  
-Hindustan College of Science & Technology
+- Multi-agent architecture implementation
+- Deployed Campus Support Coordinator
+- Academic Support Agent integration
+- IT Support Agent integration
+- Agent-to-Agent routing evidence
+- Knowledge retrieval evidence
+- Microsoft Foundry evaluation results
+- Azure Application Insights tracing
+- Python invocation code
+- Dependency configuration
+- Environment configuration example
+- Secure secret handling
+- GitHub Actions CI workflow
+- Passing CI build
 
-## Agent Execution Evidence
-
-### Agent-to-Agent Routing
-
-The Campus Support Coordinator routes technical support requests to the IT Support Agent using agent-to-agent (A2A) communication.
-
-![IT Support Agent Routing Trace](images/it-agent-routing-trace.png)
-
-### Knowledge Retrieval
-
-The system uses the configured knowledge source to retrieve relevant information when handling student queries.
-
-![Knowledge Search Trace](images/knowledge-search-trace.png)
-
-### Evaluation Results
-
-The Campus Support Coordinator was evaluated in Microsoft Foundry using an automatic evaluation run.
-
-The evaluation assessed response quality and agent behavior across multiple test queries, including academic and IT-support scenarios.
-
-Key results included:
-- Task Adherence: 100%
-- Relevance: 100%
-- Intent Resolution: 100%
-- Tool Output Utilization: 94%
-
-![Microsoft Foundry Evaluation Results](images/evaluation-results.png)
+---
 
 ## Validation Checklist
 
@@ -203,9 +345,24 @@ Key results included:
 - [x] Intent Resolution: 100%
 - [x] Tool Output Utilization: 94%
 - [x] Microsoft Foundry traces captured
+- [x] Agent deployed and running
 - [x] Python invocation code included
 - [x] Dependencies documented
 - [x] Environment configuration example provided
 - [x] Secrets excluded from repository
 - [x] GitHub Actions CI configured
 - [x] CI build passed
+
+---
+
+## Author
+
+**Zaid Khan**  
+B.Tech Computer Science & Engineering  
+Hindustan College of Science & Technology
+
+---
+
+## License
+
+This project is licensed under the terms provided in the `LICENSE` file.
