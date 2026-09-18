@@ -1,5 +1,7 @@
 # Campus Support Multi-Agent System
 
+![Python CI](https://github.com/zaid-sketch/campus-support-multi-agent/actions/workflows/ci.yml/badge.svg)
+
 A multi-agent AI system built using Microsoft Foundry to provide students with academic and IT support through intelligent agent-to-agent routing.
 
 ## Overview
