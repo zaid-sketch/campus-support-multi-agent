@@ -83,6 +83,74 @@ Campus Support Coordinator → IT Support Agent → Student Response
 - Azure Monitor
 - GitHub
 
+## Installation and Usage
+
+### Prerequisites
+
+Before running the project, make sure you have:
+
+- Python 3.11 or later
+- An Azure account with access to the Microsoft Foundry project
+- Azure CLI installed and authenticated
+- Access to the deployed Campus Support Coordinator agent
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/zaid-sketch/campus-support-multi-agent.git
+cd campus-support-multi-agent
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Azure Authentication
+
+Sign in to Azure:
+
+```bash
+az login
+```
+
+The Python invocation script uses `DefaultAzureCredential` to authenticate with Azure.
+
+### Environment Configuration
+
+The repository includes `.env.example` as a reference for the project configuration.
+
+Do not commit API keys, tokens, `.env` files, or other credentials to the repository.
+
+### Run the Coordinator
+
+```bash
+python src/invoke_coordinator.py
+```
+
+The script connects to the Microsoft Foundry project and invokes the deployed `campus-support-coordinator` agent.
+
+## Repository Structure
+
+```text
+campus-support-multi-agent/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── images/
+│   ├── evaluation-results.png
+│   ├── it-agent-routing-trace.png
+│   └── knowledge-search-trace.png
+├── src/
+│   └── invoke_coordinator.py
+├── .env.example
+├── .gitignore
+├── LICENSE
+├── README.md
+└── requirements.txt
+```
+
 ## Project Status
 
 The multi-agent system has been built, tested, evaluated, and monitored successfully.
